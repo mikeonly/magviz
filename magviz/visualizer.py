@@ -356,8 +356,8 @@ class MagneticFieldVisualizer:
             colors = None
             colorbar_title = None
         
-        # Create cone plot for vectors
-        fig = go.Figure(data=go.Cone(
+        # Build cone parameters
+        cone_params = dict(
             x=coords[:, 0],
             y=coords[:, 1],
             z=coords[:, 2],
@@ -365,10 +365,26 @@ class MagneticFieldVisualizer:
             v=directions[:, 1] * scale,
             w=directions[:, 2] * scale,
             colorscale='Viridis',
-            colorbar=dict(title=colorbar_title) if colorbar_title else None,
-            **({} if colors is None else {'intensity': colors}),
-            **kwargs
-        ))
+            sizemode='absolute',
+            sizeref=0.5,
+        )
+        
+        # Add color parameters only if colors are specified
+        if colors is not None:
+            cone_params['cmin'] = colors.min()
+            cone_params['cmax'] = colors.max()
+            cone_params['colorbar'] = dict(title=colorbar_title)
+            # Use magnitude-based sizing/coloring by setting u, v, w appropriately
+            # Plotly Cone uses u, v, w magnitude for coloring by default
+            cone_params['u'] = vectors[:, 0] * scale
+            cone_params['v'] = vectors[:, 1] * scale
+            cone_params['w'] = vectors[:, 2] * scale
+        
+        # Add any additional kwargs
+        cone_params.update(kwargs)
+        
+        # Create cone plot for vectors
+        fig = go.Figure(data=go.Cone(**cone_params))
         
         fig.update_layout(
             scene=dict(
