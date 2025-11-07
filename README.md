@@ -1,0 +1,2 @@
+# magviz
+Magnetic field visualizations
