@@ -1,14 +1,14 @@
 """
 Unit tests for magviz magnetic field visualization library.
+
+Run tests with:
+    python -m unittest discover -s tests
+    or
+    python -m pytest tests/
 """
 
 import unittest
 import numpy as np
-import sys
-import os
-
-# Add parent directory to path
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from magviz import MagneticFieldVisualizer, plot_magnetic_field, plot_current_distribution
 

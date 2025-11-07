@@ -671,7 +671,7 @@ def plot_magnetic_field(
         if plot_type == 'vectors':
             return viz.plot_matplotlib_2d_vectors(B_x, B_y, B_z, coordinates, **kwargs)
         elif plot_type == 'colormap':
-            return viz.plot_matplotlib_2d_colormap(B_x, B_y, **kwargs)
+            return viz.plot_matplotlib_2d_colormap(B_x, B_y, B_z, **kwargs)
         else:
             raise ValueError(f"Unknown plot_type '{plot_type}' for Matplotlib")
     

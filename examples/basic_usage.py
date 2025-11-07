@@ -6,14 +6,15 @@ This script demonstrates:
 2. Using different visualization backends (PyVista, Vedo, Plotly, Matplotlib)
 3. Plotting vector fields and colormaps
 4. Visualizing current distributions
+
+To run this example, first install the package:
+    pip install -e .
+
+Then run:
+    python examples/basic_usage.py
 """
 
 import numpy as np
-import sys
-import os
-
-# Add parent directory to path for importing magviz
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from magviz import MagneticFieldVisualizer, plot_magnetic_field, plot_current_distribution
 
